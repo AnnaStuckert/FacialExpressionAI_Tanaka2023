@@ -5,14 +5,14 @@ Transfer learning with SqueezeNet
 %}
 
 %Load dataset
-imds = imageDatastore('train', ...
+imds = imageDatastore('*****', ...
     'IncludeSubfolders',true, ...
     'LabelSource','foldernames');
 %Divide the data into training and validation datasets
 [imdsTrain,imdsValidation] = splitEachLabel(imds,0.7,'randomized')
 %Record image names of each datasets
-writecell(imdsTrain.Files,'*****');
-writecell(imdsValidation.Files,'*****');
+writecell(imdsTrain.Files,'*****.csv');
+writecell(imdsValidation.Files,'*****.csv');
 %Load pretrained network
 net = squeezenet;
 net.Layers(1)
@@ -74,7 +74,7 @@ options = trainingOptions('sgdm', ...
 YValidation = imdsValidation.Labels;
 accuracy = mean(YPred == YValidation)
 %save model
-save("*****","netTransfer")
+save("*****.mat","netTransfer")
 %save the history of accuracy and loss
 output = [info.TrainingAccuracy;info.ValidationAccuracy;info.TrainingLoss;info.ValidationLoss]';
-writematrix(output,"*****");
+writematrix(output,"*****.csv");
